@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
+import { SideNav } from "@/components/side-nav"
+import { Header } from "@/components/header/header"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +26,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-        {children}
+            <div className="grid h-screen w-full pl-[56px]">
+              <SideNav />
+              <div className="flex flex-col">
+                <Header />
+                {children}
+                </div>
+            </div>  
         </ThemeProvider>
       </body>
     </html>
