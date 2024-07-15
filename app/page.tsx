@@ -1,3 +1,5 @@
+"use-client"
+
 import {
   Book,
   PawPrint,
@@ -20,11 +22,12 @@ import {
 } from "@/components/ui/tooltip"
 import { ModeToggle } from "@/components/mode-toggle"
 import { AboutDialog } from "@/components/about-dialog"
-
+import { MessageBubble } from "@/components/message-bubble"
 
 export default function Home() {
   return (
     <div className="grid h-screen w-full pl-[56px]">
+      {/* Side nav bar */}
       <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
         <div className="border-b p-2">
           <Button variant="outline" size="icon" aria-label="Home">
@@ -118,6 +121,7 @@ export default function Home() {
           </TooltipProvider>
         </nav>
       </aside>
+      
       <div className="flex flex-col">
         <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
           <h1 className="text-xl font-semibold">The Bear</h1>
@@ -168,10 +172,27 @@ export default function Home() {
             </form>
           </div>
           <div className="relative flex h-full min-h-[50vh] flex-col rounded-xl bg-muted/50 p-4 lg:col-span-2">
-            <Badge variant="outline" className="absolute right-3 top-3">
+            {/* <Badge variant="outline" className="absolute right-3 top-3">
               Output
-            </Badge>
-            <div className="flex-1" />
+            </Badge> */}
+            <div className="chat-container">
+              <div className="messages-container">
+                <MessageBubble message="Sender 1 message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender 2message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender 3message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender4 message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender5 message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender6 message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+                <MessageBubble message="Sender6 message" isSender={true} />
+                <MessageBubble message="Reciver message" isSender={false} />
+              </div>
+            </div>
             <form
               className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
             >
