@@ -4,6 +4,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { SideNav } from "@/components/side-nav"
 import { Header } from "@/components/header/header"
+import {
+  TooltipProvider,
+} from "@/components/ui/tooltip"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,13 +29,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="grid h-screen w-full pl-[56px]">
-              <SideNav />
-              <div className="flex flex-col">
-                <Header />
-                {children}
+            <TooltipProvider>
+              <div className="grid h-screen w-full pl-[56px]">
+                <SideNav />
+                <div className="flex flex-col">
+                  <Header />
+                  {children}
                 </div>
-            </div>  
+              </div>  
+            </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

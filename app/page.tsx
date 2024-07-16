@@ -56,20 +56,20 @@ export default function Home() {
         </Badge> */}
         <div className="chat-container">
           <div className="messages-container">
-            <MessageBubble message="Sender 1 message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender 2message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender 3message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender4 message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender5 message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender6 message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
-            <MessageBubble message="Sender6 message" isSender={true} />
-            <MessageBubble message="Reciver message" isSender={false} />
+            <MessageBubble message="Sender 1 message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender 2message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender 3message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender4 message" isSender={true}  isLoading/>
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender5 message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender6 message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            <MessageBubble message="Sender6 message" isSender={true} isLoading />
+            <MessageBubble message="Reciver message" isSender={false} isLoading />
           </div>
         </div>
         <form
@@ -83,6 +83,8 @@ export default function Home() {
             placeholder="Ask Bear to generate a new recipie, ask him questions about a generated recipie, etc..."
             className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
           />
+
+        
           <div className="flex items-center p-3 pt-0">
             <Button type="submit" size="sm" className="ml-auto gap-1.5">
               Send Message
@@ -90,7 +92,10 @@ export default function Home() {
             </Button>
           </div>
         </form>
+
+        
       </div>
+      
     </main>
   )
 }
