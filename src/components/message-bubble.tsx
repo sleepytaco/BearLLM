@@ -5,16 +5,16 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 interface MessageBubbleProps {
   message: string;
-  isSender: boolean;
+  isLLM: boolean;
   isLoading: boolean;
 }
 
-export function MessageBubble({ message, isSender, isLoading } : MessageBubbleProps)  {
+export function MessageBubble({ message, isLLM, isLoading } : MessageBubbleProps)  {
   const [loading, setLoading] = React.useState(isLoading);
   return (
-    <div className={`message-bubble ${isSender ? 'sender' : 'receiver'}`}>
+    <div className={`message-bubble ${isLLM ? 'receiver' : 'sender'}`}>
       <div className="message-content">
-        { loading ? <p>{message}</p> :
+        { !loading ? <p>{message}</p> :
         <div className="flex items-center space-x-4">
           {/* <Skeleton className="h-12 w-12 rounded-full" /> */}
           <div className="space-y-2">

@@ -5,9 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { MessageBubble } from "@/components/message-bubble"
+import prisma from "@/lib/db"
+import { addMessage } from "@/actions/actions"
+import { useActionState } from "react"
 
+export default async function Home() {
+  const messages = await prisma.message.findMany();
+  const [error, action, isPending] = useActionState(addMessage, null);
 
-export default function Home() {
   return (
     <main className="grid flex-1 gap-4 overflow-auto p-4 md:grid-cols-2 lg:grid-cols-3">
       <div
@@ -56,23 +61,19 @@ export default function Home() {
         </Badge> */}
         <div className="chat-container">
           <div className="messages-container">
-            <MessageBubble message="Sender 1 message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender 2message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender 3message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender4 message" isSender={true}  isLoading/>
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender5 message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender6 message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
-            <MessageBubble message="Sender6 message" isSender={true} isLoading />
-            <MessageBubble message="Reciver message" isSender={false} isLoading />
+            {
+              messages.map((message) => (
+              <MessageBubble key={message.id} message={message.content} isLLM={message.isLLM} isLoading={false} />))
+            }
+            {
+              isPending ?
+              <MessageBubble message={"Loading..."} isLLM={true} isLoading={true} />
+              :
+              <></>
+            }
           </div>
         </div>
-        <form
+        <form action={action}
           className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
         >
           <Label htmlFor="message" className="sr-only">
@@ -80,6 +81,7 @@ export default function Home() {
           </Label>
           <Textarea
             id="message"
+            name="message"
             placeholder="Ask Bear to generate a new recipie, ask him questions about a generated recipie, etc..."
             className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
           />
