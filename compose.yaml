@@ -5,7 +5,9 @@ services:
       - POSTGRES_PASSWORD=example
     ports:
       - "5432:5432"
-  
+    volumes:  # Persist the db data
+      - database-data:/var/lib/postgresql/data
+
   # app:
   #   build:
   #     context: .
@@ -14,6 +16,11 @@ services:
   #     - "3000:3000"
   #   environment:
   #     - NODE_ENV=development
+  #     - POSTGRES_URL=${DOCKER_POSTGRES_URL}
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
   #   develop:
   #     watch:
   #       - action: sync
@@ -23,3 +30,6 @@ services:
   #           - node_modules/
   #       - action: rebuild
   #         path: package.json
+
+volumes:
+  database-data:
