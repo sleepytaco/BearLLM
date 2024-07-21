@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider"
-import { SideNav } from "@/components/side-nav"
+import { SideNav } from "@/components/header/side-nav"
 import { Header } from "@/components/header/header"
-import {
-  TooltipProvider,
-} from "@/components/ui/tooltip"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "The Bear",
-  description: "The Bear is a LLM that will help you create recipies based on your preferences.",
+  description: "The Bear is a LLM that will help you create recipes based on your preferences.",
 };
 
 export default function RootLayout({
@@ -23,22 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TooltipProvider>
-              <div className="grid h-screen w-full pl-[56px]">
-                <SideNav />
-                <div className="flex flex-col">
-                  <Header />
-                  {children}
-                </div>
-              </div>  
-            </TooltipProvider>
-        </ThemeProvider>
+          <div className="grid h-screen w-full pl-[56px]">
+            <SideNav />
+            <div className="flex flex-col">
+              <Header />
+              {children}
+            </div>
+          </div>  
       </body>
     </html>
   );

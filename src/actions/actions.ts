@@ -4,6 +4,8 @@ import prisma from "@/lib/db"
 import { revalidatePath } from "next/cache";
 
 export async function addMessage(formData: FormData) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     await prisma.message.create({
         data: {
             content: formData.get("message") as string,
@@ -11,5 +13,5 @@ export async function addMessage(formData: FormData) {
         },
     });
 
-    revalidatePath("/"); // re-renders the page with latest data
+    return null
 }

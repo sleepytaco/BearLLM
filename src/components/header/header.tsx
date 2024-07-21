@@ -1,7 +1,4 @@
-"use client"
-
 import { AboutDialog } from "@/components/header/about-dialog";
-import { ModeToggle } from "@/components/header/mode-toggle";
 
 export function Header() {
     return (
@@ -9,7 +6,6 @@ export function Header() {
             <h1 className="text-xl font-semibold">The Bear</h1>
             <div className="ml-auto gap-1.5 text-sm">
             <AboutDialog />
-            <ModeToggle />
             </div>
         </header>
     );

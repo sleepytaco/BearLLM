@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -30,8 +32,8 @@ export function AboutDialog() {
         <DialogHeader>
           <DialogTitle>About The Bear</DialogTitle>
           <DialogDescription>
-              The Bear is a LLM-based platform to generate, bookmark, and share recipies.
-              A LLM nicknamed Bear will help you create recipies based on your preferences.
+              The Bear is a LLM-based platform to generate, bookmark, and share recipes.
+              A LLM nicknamed Bear will help you create recipes based on your preferences.
                This app is named after the critically-acclaimed show <Link href="https://www.rottentomatoes.com/tv/the_bear" target="_blank" className="underline text-blue-600 hover:text-blue-800">The Bear</Link>.
           </DialogDescription>
         </DialogHeader>

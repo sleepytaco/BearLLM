@@ -1,6 +1,6 @@
 export default function Home() {
     return (
-     <h1>History</h1>
+     <h1>Generated Recipe History</h1>
     )
   }
   

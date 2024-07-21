@@ -12,10 +12,13 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TooltipBtn } from "@/components/tooltip-btn"
+import {
+    TooltipProvider,
+  } from "@/components/ui/tooltip"
 
 const topNav = [
-    { label: "Generate Recipies", icon: <SquareTerminal className="size-5" />, href: "/" },
-    { label: "History", icon: <Book className="size-5" />, href: "/history" },
+    { label: "Generate Recipes", icon: <SquareTerminal className="size-5" />, href: "/chat" },
+    { label: "History", icon: <Book className="size-5" />, href: "/chat/history" },
     { label: "Settings", icon: <Settings2 className="size-5" />, href: "/settings" },
  ];
 
@@ -29,10 +32,14 @@ export function SideNav() {
 
     return (<aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
         <div className="border-b p-2">
-          <Button variant="outline" size="icon" aria-label="Home">
-            <PawPrint className="size-5 fill-foreground" />
-          </Button>
+         <Link href="/">
+            <Button variant="outline" size="icon" aria-label="Home">
+                <PawPrint className="size-5 fill-foreground" />
+            </Button>
+          </Link>
         </div>
+
+        <TooltipProvider>
         <nav className="grid gap-1 p-2">
             { topNav.map((item) => (
                 <Link key={item.label} href={item.href}>
@@ -49,5 +56,7 @@ export function SideNav() {
                 </Link>
             )) }
         </nav>
+        </TooltipProvider>
+
       </aside>);
 }
