@@ -15,9 +15,18 @@ model Message {
   updatedAt DateTime @updatedAt
 }
 
-model UserPreference {
-  id String @id @default(cuid())
-  foodInventory String
-  kitchenInventory String
-  
+// model UserPreference {
+//   id String @id @default(cuid())
+//   foodInventory String
+//   kitchenInventory String
+//   otherPreferences String
+//   recipes  Recipe[]
+// }
+
+model Recipe {
+  id               String          @id @default(cuid())
+  title            String
+  content          String
+  // userPreference   UserPreference  @relation(fields: [userPreferenceId], references: [id])
+  // userPreferenceId String          @unique
 }
