@@ -6,7 +6,7 @@ type UserPreferenceProviderProps = {
     children: React.ReactNode
 };
 
-type UserPreferenceState = {
+export type UserPreferenceState = {
     foodInventory: string
 	kitchenInventory: string
 	otherPreferences: string

@@ -7,36 +7,47 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { addMessage } from "@/actions/actions"
+import { sendMessage } from "@/actions/actions"
 import { useUserPreferenceContext } from '@/contexts/user-preference-context'
+import { ChatMessage } from '@/types/chat'
 
-interface SendMessageFormProps { }
+interface SendMessageFormProps {
+    appendMessageToChat: (message: ChatMessage) => void
+ }
 
-const SendMessageForm: FC<SendMessageFormProps> = ({}) => {
+const SendMessageForm: FC<SendMessageFormProps> = ({ appendMessageToChat }) => {
     const [message, setMessage] = useState("");
     const { userPreference } = useUserPreferenceContext();
 
-    // this is DERIVED from the userPreference state
-    const context = `
-        Here is what is in my food pantry:
-        ${userPreference.foodInventory}
-
-        Here are the tools that I have at my disposal:
-        ${userPreference.kitchenInventory}
-
-        Here are other preferences to keep in mind while generating a recipe:
-        ${userPreference.otherPreferences}
-    ` 
-
-    console.log(context)
+    const context = 
+    `Here is what is in user's food pantry:\n${userPreference.foodInventory}\n\nHere are the tools that the user's have at my disposal:\n${userPreference.kitchenInventory}\n\nHere are other preferences to keep in mind while generating a recipe:\n${userPreference.otherPreferences}` 
 	
 	const handleForm = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
+		e.preventDefault() // to prevent page refresh
+        
+        // append user type message to chat container
+        appendMessageToChat({
+            content: message,
+            context: context,
+            isLLM: false
+        });
+
+        // send a request to llm with userMessage+userPreferencesContext
+        // -> append llm response to chat container on success
+        appendMessageToChat({
+            content: context, // this should be the response from the LLM
+            context: context,
+            isLLM: true
+        });
+        // -> else toast an error message ?
+
+        // finally, add user message and llm response message to prisma if llm did respond
 		
 	};
+
     return (
         <>
-        <form action={addMessage} onSubmit={handleForm}
+        <form onSubmit={handleForm}
 			className="relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
 			>
             <Label htmlFor="message" className="sr-only">

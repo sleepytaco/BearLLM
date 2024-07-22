@@ -1,30 +1,36 @@
-import { FC } from 'react'
+"use client"
+
+import { FC, useState } from 'react'
 import { MessageBubble } from './message-bubble';
-import { Message } from '@prisma/client';
+import SendMessageForm from "@/components/forms/send-message"
+
 import prisma from '@/lib/db';
+import { ChatMessage } from '@/types/chat';
 
 interface ChatContainerProps {
-    initialMessages?: Message[]
+    initialMessages: ChatMessage[]
 }
 
-const ChatContainer: FC<ChatContainerProps> = ({ initialMessages }) => {
+const ChatContainer: FC<ChatContainerProps> = ({ initialMessages = [] }) => {
     // const [error, action, isPending] = useActionState(addMessage, null);
-    const messages: Message[] = []; // await prisma.message.findMany();
-    const isPending = true;
+    const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+
+    const appendMessageToChat = (message: ChatMessage) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+    };
+
     return (
         <>
         <div className="chat-container">
             <div className="messages-container">
             {
-                messages.map((message) => (
-                <MessageBubble key={message.id} message={message.content} isLLM={message.isLLM} isLoading={false} />))
-            }
-            {
-                isPending && <MessageBubble message={"Loading..."} isLLM={true} isLoading={true} />
+                messages.map((message, id) => (
+                <MessageBubble key={id} message={message} 
+                    saveToPrisma={(m) => new Promise((resolve, reject) => {})} />))
             }
             </div>
         </div>
-
+        <SendMessageForm appendMessageToChat={appendMessageToChat} />
         </>
     )
 }
