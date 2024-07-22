@@ -3,6 +3,7 @@
 import { FC, ChangeEvent, useState   } from 'react'
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { useUserPreferenceContext } from '@/contexts/user-preference-context'
 
 interface UserPreferenceProps { }
 
@@ -13,25 +14,7 @@ interface UserPreferenceState {
 }
 
 const UserPreference: FC<UserPreferenceProps> = ({}) => {
-    const [userPreference, setUserPreference] = useState<UserPreferenceState>({
-		foodInventory: "",
-		kitchenInventory: "",
-		otherPreferences: ""
-	});
-
-    // this is DERIVED from the userPreference state
-    const context = `
-        Here is what is in my food pantry:
-        ${userPreference.foodInventory}
-
-        Here are the tools that I have at my disposal:
-        ${userPreference.kitchenInventory}
-
-        Here are other preferences to keep in mind while generating a recipe:
-        ${userPreference.otherPreferences}
-    ` 
-
-    console.log(context)
+    const { setUserPreference } = useUserPreferenceContext();
 
     const handlePreferenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setUserPreference(prev => (

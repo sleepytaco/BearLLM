@@ -8,11 +8,27 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { addMessage } from "@/actions/actions"
+import { useUserPreferenceContext } from '@/contexts/user-preference-context'
 
 interface SendMessageFormProps { }
 
 const SendMessageForm: FC<SendMessageFormProps> = ({}) => {
     const [message, setMessage] = useState("");
+    const { userPreference } = useUserPreferenceContext();
+
+    // this is DERIVED from the userPreference state
+    const context = `
+        Here is what is in my food pantry:
+        ${userPreference.foodInventory}
+
+        Here are the tools that I have at my disposal:
+        ${userPreference.kitchenInventory}
+
+        Here are other preferences to keep in mind while generating a recipe:
+        ${userPreference.otherPreferences}
+    ` 
+
+    console.log(context)
 	
 	const handleForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
