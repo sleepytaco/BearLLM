@@ -18,7 +18,7 @@ import {
 
 const topNav = [
     { label: "Generate Recipes", icon: <SquareTerminal className="size-5" />, href: "/chat" },
-    { label: "History", icon: <Book className="size-5" />, href: "/chat/history" },
+    { label: "History", icon: <Book className="size-5" />, href: "/history" },
     { label: "Settings", icon: <Settings2 className="size-5" />, href: "/settings" },
  ];
 

@@ -4,7 +4,7 @@ import prisma from "@/lib/db"
 import { revalidatePath } from "next/cache";
 
 export async function addMessage(formData: FormData) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
 
     await prisma.message.create({
         data: {
