@@ -4,10 +4,10 @@ import { Message } from '@prisma/client';
 import prisma from '@/lib/db';
 
 interface ChatContainerProps {
-    initialMessages: Message[]
+    initialMessages?: Message[]
 }
 
-const ChatContainer: FC<ChatContainerProps> = async ({ initialMessages }) => {
+const ChatContainer: FC<ChatContainerProps> = ({ initialMessages }) => {
     // const [error, action, isPending] = useActionState(addMessage, null);
     const messages: Message[] = []; // await prisma.message.findMany();
     const isPending = true;
